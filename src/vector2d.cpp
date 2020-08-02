@@ -1,23 +1,22 @@
 #include "vector2d.h"
-#include "point2d.h"
 
-Vector2d::Vector2d(Point2d start_point, Point2d end_point)
+Vector2d::Vector2d(float x, float y)
 {
-    setVector(start_point, end_point);
+    setVector(x, y);
 }
 
-void Vector2d::setVector(Point2d start_point, Point2d end_point)
+void Vector2d::setVector(float x, float y)
 {
-    this->start_point = start_point;
-    this->end_point = end_point;
+    this->x = x;
+    this->y = y;
 }
 
-Point2d getStartPoint()
+float Vector2d::getX()
 {
-    return this->start_point;
+    return this->x;
 }
 
-Point2d getEndPoint()
+float Vector2d::getY()
 {
-    return this->end_point;
+    return this->y;
 }
