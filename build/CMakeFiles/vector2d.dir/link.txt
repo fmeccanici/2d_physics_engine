@@ -1,2 +1,0 @@
-/usr/bin/ar qc libvector2d.a  CMakeFiles/vector2d.dir/src/vector2d.cpp.o
-/usr/bin/ranlib libvector2d.a
