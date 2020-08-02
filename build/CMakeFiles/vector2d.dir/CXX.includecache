@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/point2d.h
+
+../include/vector2d.h
+point2d.h
+../include/point2d.h
+
+/home/fmeccanici/Documents/2d_physics_engine/src/vector2d.cpp
+vector2d.h
+/home/fmeccanici/Documents/2d_physics_engine/src/vector2d.h
+point2d.h
+/home/fmeccanici/Documents/2d_physics_engine/src/point2d.h
+
