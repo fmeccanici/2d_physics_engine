@@ -1,4 +1,5 @@
 #include "vector2d.h"
+#include <math.h>
 
 Vector2d::Vector2d(float x, float y)
 {
@@ -19,4 +20,9 @@ float Vector2d::getX()
 float Vector2d::getY()
 {
     return this->y;
+}
+
+float Vector2d::distance(Vector2d other)
+{
+    return sqrt( pow( (this->x - other.x), 2 ) + pow( (this->y - other.y), 2 ));
 }

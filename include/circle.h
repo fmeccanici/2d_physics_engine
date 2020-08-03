@@ -8,5 +8,5 @@ class Circle
     public:
         float getRadius();
         Vector2d getPosition();
-
+        bool intersection(Circle other);
 };

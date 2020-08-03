@@ -10,4 +10,8 @@ Vector2d Circle::getPosition()
     return this->position;
 }
 
-
+bool Circle::intersection(Circle other)
+{
+    float r = this->radius + other.radius;
+    return r < this->position.distance(other.getPosition());
+}

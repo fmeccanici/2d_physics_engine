@@ -13,5 +13,6 @@ class Vector2d
         void setVector(float x, float y);
         float getX();
         float getY();
+        float distance(Vector2d other);
 };
 #endif
