@@ -12,11 +12,26 @@ int main()
 
     // Vector2d vector2d(1.0, 1.0);
     // std::cout << vector2d.getX() << std::endl;
-    
-    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
-    sf::CircleShape shape(10.f);
-    shape.setFillColor(sf::Color::Green);
+    int n_circles = 1;
+    vector<Circle> balls(n_circles);
+    vector<sf::CircleShape> balls_to_draw(n_circles);
 
+    for (int i = 0; i < n_circles; i++)
+    {   
+        float radius = i;
+        float x = 1.0; 
+        float y = 1.0;
+        Vector2d position = Vector2d(x, y);
+        
+        balls[i].setCircle(radius, position);
+        
+        balls_to_draw[i].setOrigin(position.getX(), position.getY());
+        balls_to_draw[i].setRadius(radius);
+        balls_to_draw[i].setFillColor(sf::Color::Green);
+    }
+
+    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
+    
     while (window.isOpen())
     {
         sf::Event event;
@@ -27,10 +42,26 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        
+        for (int i = 0; i < balls_to_draw.size(); i++)
+        {
+            // sf::CircleShape ball(balls[i].getRadius());
+            // sf::CircleShape ball(10.0);
+
+            cout<<balls_to_draw[i].getPosition().getX()<<endl;
+            cout<<balls_to_draw[i].getPosition().getX()<<endl;
+            cout<<balls_to_draw[i].getRadius()<<endl;
+
+            cout<<"\n"<<endl;
+
+            // ball.setOrigin(balls[i].getPosition().getX(), balls[i].getPosition().getY());
+            ball.setOrigin(10.0, 10.0);
+
+            window.draw(ball);
+        }
         window.display();
     }
 
     return 0;
-    
+
 }

@@ -1,4 +1,21 @@
 #include <circle.h>
+#include <vector2d.h>
+
+Circle::Circle()
+{
+    setCircle(0.0, Vector2d());
+}
+
+Circle::Circle(float radius, Vector2d position)
+{
+    setCircle(radius, position);
+}
+
+void Circle::setCircle(float radius, Vector2d position)
+{
+    this->radius = radius;
+    this->position = position;
+}
 
 float Circle::getRadius()
 {

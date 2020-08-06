@@ -6,6 +6,11 @@ Vector2d::Vector2d(float x, float y)
     setVector(x, y);
 }
 
+Vector2d::Vector2d()
+{
+    setVector(0, 0);
+}
+
 void Vector2d::setVector(float x, float y)
 {
     this->x = x;
