@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
 include_directories(include)
 
 set(SOURCES_FILES src/main.cpp src/vector2d.cpp src/aabb.cpp src/circle.cpp)
-
 add_executable(main ${SOURCES_FILES})
+
+target_link_libraries(main sfml-graphics sfml-window sfml-system)
+
 
 
