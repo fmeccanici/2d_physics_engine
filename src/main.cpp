@@ -26,7 +26,8 @@ int main()
 
         Vector2d position = Vector2d(x, y);
         
-        balls[i].setCircle(radius, position);
+        balls[i].setRadius(radius);
+        balls[i].setPosition(position);
         
         balls_to_draw[i].setPosition(position.getX(), position.getY());
         balls_to_draw[i].setRadius(radius);

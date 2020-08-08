@@ -3,18 +3,34 @@
 
 Circle::Circle()
 {
-    setCircle(0.0, Vector2d());
+    setRadius(0.0);
+    setPosition(Vector2d());
 }
 
 Circle::Circle(float radius, Vector2d position)
 {
-    setCircle(radius, position);
+    setRadius(radius);
+    setPosition(position);
 }
 
-void Circle::setCircle(float radius, Vector2d position)
+void Circle::setRadius(float radius)
 {
     this->radius = radius;
+}
+
+void Circle::setPosition(Vector2d position)
+{
     this->position = position;
+}
+
+void Circle::setVelocity(Vector2d velocity)
+{
+    this->velocity = velocity;
+}
+
+void Circle::setAcceleration(Vector2d acceleration)
+{
+    this->acceleration = acceleration;
 }
 
 float Circle::getRadius()
