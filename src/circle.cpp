@@ -5,6 +5,8 @@ Circle::Circle()
 {
     setRadius(0.0);
     setPosition(Vector2d());
+    setVelocity(Vector2d());
+    setAcceleration(Vector2d());
 }
 
 Circle::Circle(float radius, Vector2d position)

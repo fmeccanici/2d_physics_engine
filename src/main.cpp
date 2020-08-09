@@ -6,10 +6,9 @@
 
 using namespace std;
 
-
 int main()
 {   
-    int n_circles = 5;
+    int n_circles = 1;
     vector<Circle> balls(n_circles);
     vector<sf::CircleShape> balls_to_draw(n_circles);
 
@@ -25,9 +24,11 @@ int main()
         float y = random_y_position;
 
         Vector2d position = Vector2d(x, y);
+        Vector2d velocity = Vector2d(10.0, 10.0);
         
         balls[i].setRadius(radius);
         balls[i].setPosition(position);
+        balls[i].setVelocity(velocity);
         
         balls_to_draw[i].setPosition(position.getX(), position.getY());
         balls_to_draw[i].setRadius(radius);
@@ -38,6 +39,9 @@ int main()
     
     while (window.isOpen())
     {
+        float dt = 0.01;
+        Vector2d velocity = Vector2d(1.0, 1.0);
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -50,6 +54,12 @@ int main()
         for (int i = 0; i < balls_to_draw.size(); i++)
         {
             window.draw(balls_to_draw[i]);
+            
+            Vector2d next_position = Vector2d(balls[i].getPosition().getX() + velocity.getX() * dt, balls[i].getPosition().getY() + velocity.getY() * dt);
+
+            balls[i].setPosition(next_position);
+            balls_to_draw[i].setPosition(next_position.getX(), next_position.getY());
+
         }
 
         window.display();
