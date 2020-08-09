@@ -24,11 +24,15 @@ int main()
         float y = random_y_position;
 
         Vector2d position = Vector2d(x, y);
-        Vector2d velocity = Vector2d(10.0, 10.0);
+        // Vector2d velocity = Vector2d(1.0, 1.0);
         
         balls[i].setRadius(radius);
+
+        float mass_in_kg = 0.001;
+        balls[i].setMass(mass_in_kg);
+
         balls[i].setPosition(position);
-        balls[i].setVelocity(velocity);
+        // balls[i].setVelocity(velocity);
         
         balls_to_draw[i].setPosition(position.getX(), position.getY());
         balls_to_draw[i].setRadius(radius);
@@ -54,11 +58,9 @@ int main()
         for (int i = 0; i < balls_to_draw.size(); i++)
         {
             window.draw(balls_to_draw[i]);
-            
-            Vector2d next_position = Vector2d(balls[i].getPosition().getX() + velocity.getX() * dt, balls[i].getPosition().getY() + velocity.getY() * dt);
+            balls[i].numericalIntegrationStep();
 
-            balls[i].setPosition(next_position);
-            balls_to_draw[i].setPosition(next_position.getX(), next_position.getY());
+            balls_to_draw[i].setPosition(balls[i].getPosition().getX(), balls[i].getPosition().getY());
 
         }
 

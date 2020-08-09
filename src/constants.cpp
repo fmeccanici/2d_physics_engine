@@ -1,0 +1,2 @@
+
+const float PIXEL_IN_METRES = 0.0002645833;
