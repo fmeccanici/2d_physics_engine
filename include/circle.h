@@ -1,31 +1,15 @@
 #include <vector2d.h>
+#include <rigid_body.h>
 
-class Circle
+class Circle : RigidBody
 {
     private:
         float radius;
-        float mass;
-        Vector2d position;
-        Vector2d velocity;
-        Vector2d acceleration;
 
     public:
         Circle();
         Circle(float mass, float radius, Vector2d position);
-        void setRadius(float radius);
-        void setMass(float mass);
 
-        void setPosition(Vector2d position);
-        void setVelocity(Vector2d velocity);
-        void setAcceleration(Vector2d acceleration);
-
-        float getRadius();
-        float getMass();
-
-        Vector2d getPosition();
-        Vector2d getVelocity();
-        Vector2d getAcceleration();
-
-        bool intersection(Circle other);
-        void numericalIntegrationStep();
+        void setShape(float radius)
+        bool intersection(RigidBody other) override;
 };

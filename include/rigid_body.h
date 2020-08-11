@@ -9,22 +9,18 @@ class RigidBody
         Vector2d acceleration;
 
     public:
-        Rectangle();
-        Rectangle(float mass, float radius, Vector2d position);
-        void setRadius(float radius);
+        RigidBody();
         void setMass(float mass);
-
         void setPosition(Vector2d position);
         void setVelocity(Vector2d velocity);
         void setAcceleration(Vector2d acceleration);
-
-        float getRadius();
-        float getMass();
+        void setShape();
 
         Vector2d getPosition();
         Vector2d getVelocity();
         Vector2d getAcceleration();
 
-        bool intersection(Circle other);
+        virtual bool intersection(RigidBody other);
+ 
         void numericalIntegrationStep();
 };
