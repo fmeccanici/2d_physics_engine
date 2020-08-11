@@ -1,6 +1,7 @@
 #include <vector2d.h>
 #include <circle.h>
 #include <iostream>
+#include <constants.h>
 
 #include <SFML/Graphics.hpp>
 
@@ -59,7 +60,7 @@ int main()
         {
             window.draw(balls_to_draw[i]);
             balls[i].numericalIntegrationStep();
-
+            
             balls_to_draw[i].setPosition(balls[i].getPosition().getX(), balls[i].getPosition().getY());
 
         }

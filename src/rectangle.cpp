@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-Circle::Circle()
+Rectangle::Rectangle()
 {
     setRadius(0.0);
     setMass(0.0);
@@ -14,7 +14,7 @@ Circle::Circle()
     setAcceleration(Vector2d());
 }
 
-Circle::Circle(float radius, float mass, Vector2d position)
+Rectangle::Rectangle(float radius, float mass, Vector2d position)
 {
     setRadius(radius);
     setRadius(mass);
