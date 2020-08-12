@@ -1,89 +1,70 @@
-#include <circle.h>
+#include <rectangle.h>
 #include <vector2d.h>
 #include <constants.h>
 
 #include <iostream>
 
-
 Rectangle::Rectangle()
 {
-    setRadius(0.0);
+    setWidth(0.0);
+    setHeight(0.0);
     setMass(0.0);
     setPosition(Vector2d());
     setVelocity(Vector2d());
     setAcceleration(Vector2d());
 }
 
-Rectangle::Rectangle(float radius, float mass, Vector2d position)
+Rectangle::Rectangle(float mass, float width, float height, Vector2d position, Vector2d velocity)
 {
-    setRadius(radius);
-    setRadius(mass);
+    setWidth(width);
+    setHeight(height);
     setPosition(position);
+    setVelocity(velocity);
     setAcceleration(Vector2d(0.0, 9.81*mass));
 }
 
-void Circle::setRadius(float radius)
+void Rectangle::setWidth(float width)
 {
-    this->radius = radius;
+    this->width = width;
 }
 
-void Circle::setMass(float mass)
+void Rectangle::setHeight(float height)
 {
-    this->mass = mass;
-    setAcceleration(Vector2d(0.0, 9.81*mass));
-
+    this->height = height;
 }
 
-void Circle::setPosition(Vector2d position)
+float Rectangle::getWidth()
 {
-    this->position = position;
+    return this->width;
 }
 
-void Circle::setVelocity(Vector2d velocity)
+float Rectangle::getHeight()
 {
-    this->velocity = velocity;
+    return this->height;
 }
 
-void Circle::setAcceleration(Vector2d acceleration)
+Vector2d Rectangle::getTopLeft()
 {
-    this->acceleration = acceleration;
+    return this->getPosition() - Vector2d(this->getWidth()/2, this->getHeight()/2);
 }
 
-float Circle::getRadius()
+Vector2d Rectangle::getBottomRight()
 {
-    return this->radius;
+    return this->getPosition() + Vector2d(this->getWidth()/2, this->getHeight()/2);
 }
 
-float Circle::getMass()
+bool Rectangle::intersection(Rectangle other)
 {
-    return this->mass;
-}
-
-Vector2d Circle::getPosition()
-{
-    return this->position;
-}
-
-Vector2d Circle::getVelocity()
-{
-    return this->velocity;
-}
-
-Vector2d Circle::getAcceleration()
-{
-    return this->acceleration;
-}
-
-bool Circle::intersection(Circle other)
-{
-    float r = this->radius + other.radius;
-    return r < this->position.distance(other.getPosition());
-}
-
-void Circle::numericalIntegrationStep()
-{   
-    float time_step = 0.01;
+    if (this->getBottomRight().getX() < other.getTopLeft().getX() || this->getTopLeft().getX() > other.getBottomRight().getX())
+    {
+        return false;
+    }
     
-    setPosition( Vector2d(this->getPosition().getX() + this->getVelocity().getX() * time_step, this->getPosition().getY() + this->getVelocity().getY() * time_step) );
-    setVelocity( Vector2d(this->getVelocity().getX() + this->getAcceleration().getX() * time_step, this->getVelocity().getY() + this->getAcceleration().getY() * time_step) );
+    if (this->getBottomRight().getY() < other.getTopLeft().getY() || this->getTopLeft().getY() > other.getBottomRight().getY())
+    {
+        return false;
+    }
+
+    return true;
 }
+

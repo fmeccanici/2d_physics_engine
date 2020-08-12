@@ -1,32 +1,26 @@
 #include <vector2d.h>
+#include <rigid_body.h>
 
-class Circle
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
+
+class Rectangle : public RigidBody
 {
     private:
         float width;
         float height;
 
-        Vector2d position;
-        Vector2d velocity;
-        Vector2d acceleration;
-
     public:
         Rectangle();
-        Rectangle(float mass, float radius, Vector2d position);
-        void setRadius(float radius);
-        void setMass(float mass);
+        Rectangle(float mass, float width, float height, Vector2d position, Vector2d velocity);
+        void setWidth(float width);
+        void setHeight(float height);
+        float getWidth();
+        float getHeight();
+        Vector2d getBottomRight();
+        Vector2d getTopLeft();
 
-        void setPosition(Vector2d position);
-        void setVelocity(Vector2d velocity);
-        void setAcceleration(Vector2d acceleration);
-
-        float getRadius();
-        float getMass();
-
-        Vector2d getPosition();
-        Vector2d getVelocity();
-        Vector2d getAcceleration();
-
-        bool intersection(Circle other);
-        void numericalIntegrationStep();
+        bool intersection(Rectangle other);
 };
+
+#endif
