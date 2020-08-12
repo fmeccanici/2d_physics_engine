@@ -1,15 +1,17 @@
 #include <vector2d.h>
 #include <rigid_body.h>
 
-class Circle : RigidBody
+class Circle : public RigidBody
 {
     private:
         float radius;
 
     public:
         Circle();
-        Circle(float mass, float radius, Vector2d position);
+        Circle(float mass, float radius, Vector2d position, Vector2d velocity);
 
-        void setShape(float radius)
-        bool intersection(RigidBody other) override;
+        void setRadius(float radius);
+        float getRadius();
+
+        bool intersection(Circle other);
 };

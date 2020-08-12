@@ -1,12 +1,15 @@
 #include <vector2d.h>
 
+#ifndef RIGID_BODY_H
+#define RIGID_BODY_H
+
 class RigidBody
 {
     private:
-    
         Vector2d position;
         Vector2d velocity;
         Vector2d acceleration;
+        float mass;
 
     public:
         RigidBody();
@@ -14,13 +17,14 @@ class RigidBody
         void setPosition(Vector2d position);
         void setVelocity(Vector2d velocity);
         void setAcceleration(Vector2d acceleration);
-        void setShape();
 
         Vector2d getPosition();
         Vector2d getVelocity();
         Vector2d getAcceleration();
-
-        virtual bool intersection(RigidBody other);
- 
+        float getMass();
+        
+        bool intersection(RigidBody other);
         void numericalIntegrationStep();
 };
+
+#endif

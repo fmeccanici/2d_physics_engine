@@ -1,4 +1,4 @@
-#include <RigidBody.h>
+#include <rigid_body.h>
 #include <vector2d.h>
 #include <constants.h>
 
@@ -7,17 +7,16 @@
 
 RigidBody::RigidBody()
 {
-    setMass(0.0);
-    setPosition(Vector2d());
-    setVelocity(Vector2d());
-    setAcceleration(Vector2d());
+    setMass( 0.0 );
+    setPosition(Vector2d(0, 0));
+    setVelocity(Vector2d(0, 0));
+    setAcceleration(Vector2d(0, 0));
 }
 
 void RigidBody::setMass(float mass)
 {
     this->mass = mass;
     setAcceleration(Vector2d(0.0, 9.81*mass));
-
 }
 
 void RigidBody::setPosition(Vector2d position)
@@ -55,7 +54,7 @@ Vector2d RigidBody::getAcceleration()
     return this->acceleration;
 }
 
-virtual bool RigidBody::intersection(RigidBody other)
+bool RigidBody::intersection(RigidBody other)
 {
     
 }
