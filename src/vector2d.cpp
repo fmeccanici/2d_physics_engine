@@ -3,28 +3,51 @@
 
 Vector2d::Vector2d(float x, float y)
 {
-    setVector(x, y);
+    setX(x);
+    setY(y);
 }
 
 Vector2d::Vector2d()
 {
-    setVector(0, 0);
+    setX(0);
+    setY(0);
 }
 
-void Vector2d::setVector(float x, float y)
+Vector2d Vector2d::operator+(const Vector2d& other)
 {
-    this->x = x;
-    this->y = y;
+    Vector2d result;
+    result.setX(this->getX() + other.getX());
+    result.setY(this->getY() + other.getY());
+    return result;
 }
 
-float Vector2d::getX()
+Vector2d Vector2d::operator-(const Vector2d& other)
+{
+    Vector2d result;
+    result.setX(this->getX() - other.getX());
+    result.setY(this->getY() - other.getY());
+    return result;
+}
+
+
+float Vector2d::getX() const
 {
     return this->x;
 }
 
-float Vector2d::getY()
+float Vector2d::getY() const
 {
     return this->y;
+}
+
+void Vector2d::setX(float x)
+{
+    this->x = x;
+}
+
+void Vector2d::setY(float y)
+{
+    this->y = y;
 }
 
 float Vector2d::distance(Vector2d other)
