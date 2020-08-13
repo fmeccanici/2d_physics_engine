@@ -38,3 +38,10 @@ bool Circle::intersection(Circle other)
     float r = this->getRadius() + other.getRadius();
     return r < this->getPosition().distance(other.getPosition()); 
 }
+
+
+
+void Circle::resolveCollision(Circle other)
+{
+
+}

@@ -14,4 +14,5 @@ class Circle : public RigidBody
         float getRadius();
 
         bool intersection(Circle other);
+        void resolveCollision(Circle other);
 };
