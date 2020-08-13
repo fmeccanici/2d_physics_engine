@@ -23,8 +23,12 @@ using namespace std;
 class TestVector2d : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(TestVector2d);
-    // CPPUNIT_TEST(testDefaultConstructor);
+    CPPUNIT_TEST(testDefaultConstructor);
+    CPPUNIT_TEST(testConstructor);
+
     CPPUNIT_TEST(testAddition);
+    CPPUNIT_TEST(testSubtraction);
+
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -32,21 +36,31 @@ public:
     void tearDown(void);
 
 protected:
+    void testDefaultConstructor(void);
     void testConstructor(void);
+
     void testAddition(void);
+    void testSubtraction(void);
 
 private:
+    Vector2d *testVector2d;
     Vector2d *testVector2d_1;
     Vector2d *testVector2d_2;
-
 };
 
-// void TestVector2d::testDefaultConstructor(void)
-// {
-//     Vector2d testVector2d;
-//     CPPUNIT_ASSERT(0 == testVector2d.getX());
-//     CPPUNIT_ASSERT(0 == testVector2d.getY());
-// }
+void TestVector2d::testDefaultConstructor(void)
+{
+    Vector2d testVector2d;
+    CPPUNIT_ASSERT(0 == testVector2d.getX());
+    CPPUNIT_ASSERT(0 == testVector2d.getY());
+}
+
+void TestVector2d::testConstructor(void)
+{
+    Vector2d testVector2d(3,3);
+    CPPUNIT_ASSERT(3 == testVector2d.getX());
+    CPPUNIT_ASSERT(3 == testVector2d.getY());
+}
 
 void TestVector2d::testAddition(void)
 {
@@ -58,8 +72,19 @@ void TestVector2d::testAddition(void)
 
 }
 
+void TestVector2d::testSubtraction(void)
+{
+    Vector2d testVector2d_1(2,2);
+    Vector2d testVector2d_2(3,3);
+
+    CPPUNIT_ASSERT(-1 == (testVector2d_1 - testVector2d_2).getX());
+    CPPUNIT_ASSERT(-1 == (testVector2d_1 - testVector2d_2).getY());
+
+}
+
 void TestVector2d::setUp(void)
 {
+    testVector2d = new Vector2d();
     testVector2d_1 = new Vector2d();
     testVector2d_2 = new Vector2d();
 
@@ -67,6 +92,7 @@ void TestVector2d::setUp(void)
 
 void TestVector2d::tearDown(void)
 {
+    delete testVector2d;
     delete testVector2d_1;
     delete testVector2d_2;
 
