@@ -29,14 +29,10 @@ Vector2d Vector2d::operator-(const Vector2d& other)
     return result;
 }
 
-Vector2d Vector2d::operator*(const Vector2d& other)
+float Vector2d::operator*(const Vector2d& other)
 {
-    Vector2d result;
-    result.setX(this->getX() * other.getX());
-    result.setY(this->getY() * other.getY());
-    return result;
+    return this->getX() * other.getX() + this->getY() + other.getY();
 }
-
 
 float Vector2d::getX() const
 {

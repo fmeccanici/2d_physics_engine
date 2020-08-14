@@ -28,6 +28,7 @@ class TestVector2d : public CppUnit::TestFixture
 
     CPPUNIT_TEST(testAddition);
     CPPUNIT_TEST(testSubtraction);
+    CPPUNIT_TEST(testDotProduct);
 
     CPPUNIT_TEST_SUITE_END();
 
@@ -41,6 +42,7 @@ protected:
 
     void testAddition(void);
     void testSubtraction(void);
+    void testDotProduct(void);
 
 private:
     Vector2d *testVector2d;
@@ -79,6 +81,15 @@ void TestVector2d::testSubtraction(void)
 
     CPPUNIT_ASSERT(-1 == (testVector2d_1 - testVector2d_2).getX());
     CPPUNIT_ASSERT(-1 == (testVector2d_1 - testVector2d_2).getY());
+
+}
+
+void TestVector2d::testDotProduct(void)
+{
+    Vector2d testVector2d_1(2,2);
+    Vector2d testVector2d_2(3,3);
+
+    CPPUNIT_ASSERT(10 == (testVector2d_1 * testVector2d_2));
 
 }
 

@@ -44,4 +44,19 @@ bool Circle::intersection(Circle other)
 void Circle::resolveCollision(Circle other)
 {
 
+    relative_velocity_along_normal = getRelativeVelocityNormal(other, normal);
+
+    if isVelocitySeparating()
+    {
+        return;
+    }
+
+    impulse = getImpulseScalar(other, relative_velocity_along_normal)
+    applyImpulse(other, impulse)
+
+}
+
+void Circle::getCollisionNormal(Circle other)
+{
+    return this->getPosition() - other.getPosition();
 }

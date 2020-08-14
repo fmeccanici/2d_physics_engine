@@ -66,24 +66,31 @@ bool RigidBody::intersection(RigidBody other)
 }
 
 void RigidBody::resolveCollision(RigidBody other)
-{
-    relative_velocity_normal = getRelativeVelocityNormal(other, normal);
-
-}
+{}
 
 Vector2d RigidBody::getRelativeVelocity(RigidBody other)
 {
     return this->getVelocity() - other.getVelocity();
 }
 
-Vector2d RigidBody::getRelativeVelocityNormal(RigidBody other, float normal)
+bool isVelocitySeparating(float velocity)
+{
+    return velocity > 0;
+}
+
+float RigidBody::getRelativeVelocityNormal(RigidBody other, float normal)
 {
     return getRelativeVelocity() * normal;
 }
 
-Vector2d RigidBody::getMinRestitutionAndImpulseScalar(RigidBody other, Vector2d velocity_normal)
+Vector2d RigidBody::getMinRestitution()
 {
-    float min_restitution_coefficient = min(this->getRestitutionCoefficient(), other.getRestitutionCoefficient());
+    return min(this->getRestitutionCoefficient(), other.getRestitutionCoefficient());
+}
+
+Vector2d RigidBody::getImpulseScalar(RigidBody other, float velocity_normal)
+{
+    min_restitution_coefficient = getMinRestitution();
 
     float impulse_scalar = (-1 + min_restitution_coefficient) * velocity_normal;
     impulse_scalar /= (1 / this->getMass()) + (1 / other.getMass());
