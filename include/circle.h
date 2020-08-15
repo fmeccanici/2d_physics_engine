@@ -15,4 +15,5 @@ class Circle : public RigidBody
 
         bool intersection(Circle other);
         void resolveCollision(Circle other);
+        Vector2d getCollisionNormal(Circle other);
 };

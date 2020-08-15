@@ -34,6 +34,14 @@ float Vector2d::operator*(const Vector2d& other)
     return this->getX() * other.getX() + this->getY() + other.getY();
 }
 
+Vector2d Vector2d::operator*(const float& other)
+{   
+    Vector2d result;
+    result.setX(other * result.getX());
+    result.setY(other * result.getY());
+    return result;
+}
+
 float Vector2d::getX() const
 {
     return this->x;

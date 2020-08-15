@@ -39,24 +39,23 @@ bool Circle::intersection(Circle other)
     return r < this->getPosition().distance(other.getPosition()); 
 }
 
-
-
 void Circle::resolveCollision(Circle other)
 {
+    Vector2d normal = getCollisionNormal(other);
+    float relative_velocity_along_normal = getRelativeVelocityNormal(other, normal);
 
-    relative_velocity_along_normal = getRelativeVelocityNormal(other, normal);
-
-    if isVelocitySeparating()
+    if (isVelocitySeparating(relative_velocity_along_normal))
     {
         return;
     }
 
-    impulse = getImpulseScalar(other, relative_velocity_along_normal)
-    applyImpulse(other, impulse)
+    float impulse_scalar = getImpulseScalar(other, relative_velocity_along_normal);
+    Vector2d impulse = getImpulseNormal(impulse_scalar, normal);
 
+    applyImpulse(other, impulse);
 }
 
-void Circle::getCollisionNormal(Circle other)
+Vector2d Circle::getCollisionNormal(Circle other)
 {
     return this->getPosition() - other.getPosition();
 }

@@ -28,11 +28,15 @@ class RigidBody
         float getRestitutionCoefficient();
 
         bool intersection(RigidBody other);
-        void resolveCollision(RigidBody other);
+        void resolveCollision(RigidBody other, Vector2d collision_normal);
         void numericalIntegrationStep();
         Vector2d getRelativeVelocity(RigidBody other);
-        Vector2d getRelativeVelocityNormal(RigidBody other, float normal);
-
+        bool isVelocitySeparating(float velocity);
+        float getRelativeVelocityNormal(RigidBody other, Vector2d normal);
+        float getMinRestitution(RigidBody other);
+        float getImpulseScalar(RigidBody other, float velocity_normal);
+        Vector2d getImpulseNormal(float impulse_scalar, Vector2d normal);
+        void applyImpulse(RigidBody other, Vector2d impulse);
 };
 
 #endif

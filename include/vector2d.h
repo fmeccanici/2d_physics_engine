@@ -12,8 +12,9 @@ class Vector2d
         Vector2d(float x, float y);
         Vector2d operator+(const Vector2d& other);
         Vector2d operator-(const Vector2d& other);
-        Vector2d operator*(const Vector2d& other);
-
+        float operator*(const Vector2d& other);
+        Vector2d operator*(const float& other);
+        
         float getX() const;
         float getY() const;
         void setX(float x);

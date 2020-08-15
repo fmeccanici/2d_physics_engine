@@ -2,8 +2,10 @@
 #include <vector2d.h>
 #include <constants.h>
 
+#include <algorithm>
 #include <iostream>
 
+using namespace std;
 
 RigidBody::RigidBody()
 {
@@ -60,12 +62,17 @@ Vector2d RigidBody::getAcceleration()
     return this->acceleration;
 }
 
+float RigidBody::getRestitutionCoefficient()
+{
+    return this->restitution_coefficient;
+}
+
 bool RigidBody::intersection(RigidBody other)
 {
     
 }
 
-void RigidBody::resolveCollision(RigidBody other)
+void RigidBody::resolveCollision(RigidBody other, Vector2d collision_normal)
 {}
 
 Vector2d RigidBody::getRelativeVelocity(RigidBody other)
@@ -73,24 +80,24 @@ Vector2d RigidBody::getRelativeVelocity(RigidBody other)
     return this->getVelocity() - other.getVelocity();
 }
 
-bool isVelocitySeparating(float velocity)
+bool RigidBody::isVelocitySeparating(float velocity)
 {
     return velocity > 0;
 }
 
-float RigidBody::getRelativeVelocityNormal(RigidBody other, float normal)
+float RigidBody::getRelativeVelocityNormal(RigidBody other, Vector2d normal)
 {
-    return getRelativeVelocity() * normal;
+    return getRelativeVelocity(other) * normal;
 }
 
-Vector2d RigidBody::getMinRestitution()
+float RigidBody::getMinRestitution(RigidBody other)
 {
     return min(this->getRestitutionCoefficient(), other.getRestitutionCoefficient());
 }
 
-Vector2d RigidBody::getImpulseScalar(RigidBody other, float velocity_normal)
+float RigidBody::getImpulseScalar(RigidBody other, float velocity_normal)
 {
-    min_restitution_coefficient = getMinRestitution();
+    float min_restitution_coefficient = getMinRestitution(other);
 
     float impulse_scalar = (-1 + min_restitution_coefficient) * velocity_normal;
     impulse_scalar /= (1 / this->getMass()) + (1 / other.getMass());
@@ -100,13 +107,13 @@ Vector2d RigidBody::getImpulseScalar(RigidBody other, float velocity_normal)
 
 Vector2d RigidBody::getImpulseNormal(float impulse_scalar, Vector2d normal)
 {
-    return impulse_scalar * normal;
+    return normal * impulse_scalar;
 }
 
-Vector2d RigidBody::applyImpulse(RigidBody other, Vector2d impulse)
+void RigidBody::applyImpulse(RigidBody other, Vector2d impulse)
 {
-    this->setVelocity( this->getVelocity() - (1 / this->getMass() * impulse) );
-    other.setVelocity( other.getVelocity() + (1 / other->getMass() * impulse) );
+    this->setVelocity( this->getVelocity() - impulse * (1 / this->getMass()) );
+    other.setVelocity( other.getVelocity() + impulse * (1 / other.getMass()) );
 }
 
 void RigidBody::numericalIntegrationStep()
