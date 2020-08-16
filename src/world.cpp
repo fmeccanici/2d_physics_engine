@@ -3,52 +3,66 @@
 #include <vector2d.h>
 #include <circle.h>
 #include <constants.h>
-
-#include <SFML/Graphics.hpp>
+#include <world.h>
 
 using namespace std;
 
+void World::numericalIntegrationStep()
+{
+    for (int i = 0; i < this->balls.size(); i++)
+    {
+        balls[i].numericalIntegrationStep(this->time_step);
+    }
 
-int main()
-{   
-    int n_circles = 1;
-    vector<Circle> balls(n_circles);
-    vector<sf::CircleShape> balls_to_draw(n_circles);
+    for (int i = 0; i < this->rectangles.size(); i++)
+    {
+        rectangles[i].numericalIntegrationStep(this->time_step);
+    }
+}
+
+void World::addBall(Circle ball)
+{
+    this->balls.push_back(ball);
+}
+
+void World::addRectangle(Rectangle rectangle)
+{
+    this->rectangles.push_back(rectangle);
+}
+
+void World::addRandomBalls()
+{
+    int n_circles = rand() % 5;
+    float mass_in_kg = 0.001;
 
     for (int i = 0; i < n_circles; i++)
     {   
+        Circle ball;
+
         float random_radius = rand() % 50 + 1;
-        float radius = random_radius;
 
         float random_x_position = rand() % 700 + 1;
         float random_y_position = rand() % 700 + 1;
 
-        float x = random_x_position; 
-        float y = random_y_position;
-
-        Vector2d position = Vector2d(x, y);
+        Vector2d random_position = Vector2d(random_x_position, random_y_position);
         // Vector2d velocity = Vector2d(1.0, 1.0);
         
-        balls[i].setRadius(radius);
-
-        float mass_in_kg = 0.001;
-        balls[i].setMass(mass_in_kg);
-
-        balls[i].setPosition(position);
+        ball.setRadius(random_radius);
+        ball.setMass(mass_in_kg);
+        ball.setPosition(random_position);
         // balls[i].setVelocity(velocity);
-        
-        balls_to_draw[i].setPosition(position.getX(), position.getY());
-        balls_to_draw[i].setRadius(radius);
-        balls_to_draw[i].setFillColor(sf::Color::Green);
-    }
 
+        addBall(ball);
+    }
+}
+
+void World::startSimulation()
+{
     sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
+    addRandomBalls();
     
     while (window.isOpen())
     {
-        float dt = 0.01;
-        Vector2d velocity = Vector2d(1.0, 1.0);
-
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -58,18 +72,21 @@ int main()
 
         window.clear();
         
-        for (int i = 0; i < balls_to_draw.size(); i++)
+        for (int i = 0; i < this->balls.size(); i++)
         {
-            window.draw(balls_to_draw[i]);
-            balls[i].numericalIntegrationStep();
-            
-            balls_to_draw[i].setPosition(balls[i].getPosition().getX(), balls[i].getPosition().getY());
-
+            window.draw(balls[i].getDrawableObject());
         }
+
+        numericalIntegrationStep();
 
         window.display();
     }
+}
 
+int main()
+{   
+    World world;
+    world.startSimulation();
+    
     return 0;
-
 }

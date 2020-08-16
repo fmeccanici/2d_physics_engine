@@ -5,6 +5,8 @@
 #include <constants.h>
 #include <iostream>
 
+#include <SFML/Graphics.hpp>
+
 Circle::Circle()
 {
     setRadius(0.0);
@@ -58,4 +60,13 @@ void Circle::resolveCollision(Circle other)
 Vector2d Circle::getCollisionNormal(Circle other)
 {
     return this->getPosition() - other.getPosition();
+}
+
+sf::CircleShape Circle::getDrawableObject()
+{
+    this->drawable_circle.setPosition(this->getPosition().getX(), this->getPosition().getY());
+    this->drawable_circle.setRadius(this->getRadius());
+    this->drawable_circle.setFillColor(sf::Color::Green);
+
+    return this->drawable_circle;
 }

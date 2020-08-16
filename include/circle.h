@@ -1,10 +1,13 @@
 #include <vector2d.h>
 #include <rigid_body.h>
 
+#include <SFML/Graphics.hpp>
+
 class Circle : public RigidBody
 {
     private:
         float radius;
+        sf::CircleShape drawable_circle;
 
     public:
         Circle();
@@ -16,4 +19,6 @@ class Circle : public RigidBody
         bool intersection(Circle other);
         void resolveCollision(Circle other);
         Vector2d getCollisionNormal(Circle other);
+
+        sf::CircleShape getDrawableObject();
 };

@@ -29,7 +29,7 @@ class RigidBody
 
         bool intersection(RigidBody other);
         void resolveCollision(RigidBody other, Vector2d collision_normal);
-        void numericalIntegrationStep();
+        void numericalIntegrationStep(float time_step);
         Vector2d getRelativeVelocity(RigidBody other);
         bool isVelocitySeparating(float velocity);
         float getRelativeVelocityNormal(RigidBody other, Vector2d normal);

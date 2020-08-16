@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <iostream>
 
+#include <SFML/Graphics.hpp>
+
 using namespace std;
 
 RigidBody::RigidBody()
@@ -116,11 +118,8 @@ void RigidBody::applyImpulse(RigidBody other, Vector2d impulse)
     other.setVelocity( other.getVelocity() + impulse * (1 / other.getMass()) );
 }
 
-void RigidBody::numericalIntegrationStep()
-{   
-    float time_step = 0.01;
-    
+void RigidBody::numericalIntegrationStep(float time_step)
+{       
     setPosition( Vector2d(this->getPosition().getX() + this->getVelocity().getX() * time_step, this->getPosition().getY() + this->getVelocity().getY() * time_step) );
     setVelocity( Vector2d(this->getVelocity().getX() + this->getAcceleration().getX() * time_step, this->getVelocity().getY() + this->getAcceleration().getY() * time_step) );
 }
-
