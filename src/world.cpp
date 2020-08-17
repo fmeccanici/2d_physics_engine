@@ -46,7 +46,6 @@ void World::addRandomBalls()
 
         Vector2d random_position = Vector2d(random_x_position, random_y_position);
         // Vector2d velocity = Vector2d(1.0, 1.0);
-        // f
         ball.setRadius(random_radius);
         ball.setMass(mass_in_kg);
         ball.setPosition(random_position);
